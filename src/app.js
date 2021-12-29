@@ -4,26 +4,38 @@ import axios from "axios";
 axios
   .get("https://my-json-server.typicode.com/modanisatech/bootcamp-db/products")
   .then((response) => {
-    // Firstly, log response to the console,
-    // inspect the response and see that it has data field
+    console.log(response);
 
-    // Assign data field of the response to
-    // products variable below by destructuring
-    // You can use alias
-    const products = null;
+    const { data } = response;
+    const products = data;
 
-    // Print names of all product to the console
-    // by calling foreach  method (use arrow function)
+    products.forEach(product => console.log(product.name))
 
-    // Get all products that contain "Şal" in their name (use filter method)
-    // map filtered products to new object having only image and name field
-    // assign mapped items to mappedProducts variable
-    const mappedProducts = null;
+    const filteredProducts = products.filter(product => product.name.includes("Şal"));
 
-    // Display the images and names of mappedProducts
-    // You need to add them to the DOM
-    // you need to use forEach method
-    // You need to use flexbox
-    // Position of image and text is up to you
-    // You can use any style you wish
-  });
+    const mappedProducts = filteredProducts.map(product => ({"name": product.name, "image": product.image}));
+    console.log(mappedProducts);
+
+    const productContainer = document.createElement("div");
+    productContainer.classList.add("product-container");
+    document.body.appendChild(productContainer);
+
+    mappedProducts.forEach(product => {
+      // create a product card to display related data better
+      const productCard = document.createElement("div");
+      // create the elements that will go inside the product card
+      const productImage = document.createElement("img");
+      const productName = document.createElement("p");
+      
+      productCard.classList.add("product-card");
+      // product card gets appended to .product-container
+      document.querySelector(".product-container").appendChild(productCard);
+
+      productImage.src = product.image;
+      productName.innerHTML = product.name;
+      
+      // image and name get appended to product card
+      productCard.appendChild(productImage);
+      productCard.appendChild(productName);
+    })
+  }).catch((err) => console.error(err));

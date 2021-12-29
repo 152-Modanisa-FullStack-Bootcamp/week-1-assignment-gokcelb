@@ -53,6 +53,7 @@ header {
   margin-top: 10px;
   margin-right: 20px;
   color: grey;
+  cursor: pointer;
 }
 
 .poster-info {
@@ -120,6 +121,10 @@ main {
   margin-left: 3px;
 }
 
+.comments {
+  cursor: pointer;
+}
+
 .react {
   color: rgb(114, 113, 113);
   height: 45px;
@@ -133,6 +138,7 @@ main {
 .react > div {
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .react-text {
